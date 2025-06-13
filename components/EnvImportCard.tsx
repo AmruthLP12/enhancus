@@ -3,9 +3,8 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Upload } from "lucide-react";
-
-import { parseEnv } from "@/utils/envUtils";
 import { EnvImportCardProps } from "@/types/envbuddy";
+import { parseEnv } from "@/utils/envUtils";
 
 export const EnvImportCard = ({ onImport }: EnvImportCardProps) => {
   const [text, setText] = useState("");

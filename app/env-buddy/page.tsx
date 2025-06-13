@@ -3,27 +3,23 @@ import { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import { HeaderCard } from "@/components/HeaderCard";
 import { FAQCard } from "@/components/FAQCard";
 import { InfoCard } from "@/components/InfoCard";
 import { EnvVariableTable } from "@/components/EnvVariableTable";
 import { EnvImportCard } from "@/components/EnvImportCard";
 import { envBuddyFAQs } from "@/data/envBuddyFAQ";
-import { Home, FileText, Download, Shield } from "lucide-react";
+import { Home, FileText, Download, Shield, Copy, Check, RotateCcw } from "lucide-react";
 import { EnvVariable } from "@/types/envbuddy";
-import {
-  exportEnv,
-  exportEnvExample,
-  exportJson,
-  validateVariables,
-  downloadFile,
-} from "@/utils/envUtils";
+import { exportEnv, exportEnvExample, exportJson, validateVariables, downloadFile } from "@/utils/envUtils";
 import { v4 as uuidv4 } from "uuid";
 
 export default function EnvBuddyPage() {
   const [variables, setVariables] = useState<EnvVariable[]>([]);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [useLocalStorage, setUseLocalStorage] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (useLocalStorage) {
@@ -51,22 +47,40 @@ export default function EnvBuddyPage() {
     switch (type) {
       case "env":
         content = exportEnv(variables);
-        filename = "envbuddy.env"; // ← updated name
+        filename = "envbuddy.env";
         mimeType = "text/plain";
         break;
       case "example":
         content = exportEnvExample(variables);
-        filename = "envbuddy.env.example"; // ← updated name
+        filename = "envbuddy.env.example";
         mimeType = "text/plain";
         break;
       case "json":
         content = exportJson(variables);
-        filename = "envbuddy.json"; // ← updated name
+        filename = "envbuddy.json";
         mimeType = "application/json";
         break;
     }
 
     downloadFile(content, filename, mimeType);
+  };
+
+  const handleReset = () => {
+    setVariables([]);
+    setErrors({});
+    if (useLocalStorage) {
+      localStorage.removeItem("envBuddyVariables");
+    }
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(exportEnv(variables));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
   };
 
   return (
@@ -99,30 +113,36 @@ export default function EnvBuddyPage() {
                 />
               </CardContent>
             </Card>
-            <Button
-              onClick={() => {
-                setVariables([
-                  {
-                    id: uuidv4(),
-                    key: "API_KEY",
-                    value: "12345",
-                    description: "Your API key",
-                    optional: false,
-                    isSecret: true,
-                  },
-                  {
-                    id: uuidv4(),
-                    key: "DEBUG_MODE",
-                    value: "true",
-                    description: "Enable debug logs",
-                    optional: true,
-                    isSecret: false,
-                  },
-                ]);
-              }}
-            >
-              Load Sample Data
-            </Button>
+            <div className="flex gap-4">
+              <Button
+                onClick={() => {
+                  setVariables([
+                    {
+                      id: uuidv4(),
+                      key: "API_KEY",
+                      value: "12345",
+                      description: "Your API key",
+                      optional: false,
+                      isSecret: true,
+                    },
+                    {
+                      id: uuidv4(),
+                      key: "DEBUG_MODE",
+                      value: "true",
+                      description: "Enable debug logs",
+                      optional: true,
+                      isSecret: false,
+                    },
+                  ]);
+                }}
+              >
+                Load Sample Data
+              </Button>
+              <Button variant="outline" onClick={handleReset}>
+                <RotateCcw className="h-4 w-4 mr-2" />
+                Reset
+              </Button>
+            </div>
 
             <Card>
               <CardHeader>
@@ -139,25 +159,49 @@ export default function EnvBuddyPage() {
                     onCheckedChange={setUseLocalStorage}
                   />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Button
-                    onClick={() => handleExport("env")}
-                    disabled={Object.keys(errors).length > 0}
-                  >
-                    Export .env
-                  </Button>
-                  <Button
-                    onClick={() => handleExport("example")}
-                    disabled={Object.keys(errors).length > 0}
-                  >
-                    Export .env.example
-                  </Button>
-                  <Button
-                    onClick={() => handleExport("json")}
-                    disabled={Object.keys(errors).length > 0}
-                  >
-                    Export JSON
-                  </Button>
+                <div className="space-y-4">
+                  <div className="relative">
+                    <Textarea
+                      value={exportEnv(variables)}
+                      readOnly
+                      placeholder="Your .env content will appear here..."
+                      rows={5}
+                      className="pr-12"
+                    />
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="absolute top-2 right-2"
+                      onClick={handleCopy}
+                      disabled={variables.length === 0}
+                    >
+                      {copied ? (
+                        <Check className="h-4 w-4 text-green-600" />
+                      ) : (
+                        <Copy className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Button
+                      onClick={() => handleExport("env")}
+                      disabled={Object.keys(errors).length > 0}
+                    >
+                      Export .env
+                    </Button>
+                    <Button
+                      onClick={() => handleExport("example")}
+                      disabled={Object.keys(errors).length > 0}
+                    >
+                      Export .env.example
+                    </Button>
+                    <Button
+                      onClick={() => handleExport("json")}
+                      disabled={Object.keys(errors).length > 0}
+                    >
+                      Export JSON
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -177,14 +221,8 @@ export default function EnvBuddyPage() {
               icon={Shield}
               items={[
                 { label: "Total Variables", value: variables.length },
-                {
-                  label: "Optional Variables",
-                  value: variables.filter((v) => v.optional).length,
-                },
-                {
-                  label: "Secret Variables",
-                  value: variables.filter((v) => v.isSecret).length,
-                },
+                { label: "Optional Variables", value: variables.filter((v) => v.optional).length },
+                { label: "Secret Variables", value: variables.filter((v) => v.isSecret).length },
                 { label: "Errors", value: Object.keys(errors).length },
               ]}
             />
@@ -195,14 +233,8 @@ export default function EnvBuddyPage() {
               <CardContent>
                 <ul className="space-y-2 text-sm">
                   <li>Total Variables: {variables.length}</li>
-                  <li>
-                    Optional Variables:{" "}
-                    {variables.filter((v) => v.optional).length}
-                  </li>
-                  <li>
-                    Secret Variables:{" "}
-                    {variables.filter((v) => v.isSecret).length}
-                  </li>
+                  <li>Optional Variables: {variables.filter((v) => v.optional).length}</li>
+                  <li>Secret Variables: {variables.filter((v) => v.isSecret).length}</li>
                   <li>Errors: {Object.keys(errors).length}</li>
                 </ul>
               </CardContent>
