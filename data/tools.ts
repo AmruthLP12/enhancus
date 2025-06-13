@@ -1,4 +1,12 @@
-import { Code, Database, Hash, Key, Settings, Shield } from "lucide-react";
+import {
+  Code,
+  Database,
+  FileText,
+  Hash,
+  Key,
+  Settings,
+  Shield,
+} from "lucide-react";
 
 export const tools = [
   {
@@ -8,6 +16,16 @@ export const tools = [
     icon: Key,
     href: "/key-gen",
     category: "Security",
+    status: "Available",
+  },
+  {
+    id: "env-buddy",
+    title: "EnvBuddy",
+    description:
+      "Manage environment variables with ease, supporting .env, .env.example, and JSON exports.",
+    category: "Configuration",
+    icon: FileText,
+    href: "/env-buddy",
     status: "Available",
   },
   {
