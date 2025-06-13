@@ -1,0 +1,58 @@
+import { Code, Database, Hash, Key, Settings, Shield } from "lucide-react";
+
+export const tools = [
+  {
+    id: "key-gen",
+    title: "Django Secret Key Generator",
+    description: "Generate secure Django secret keys for your applications",
+    icon: Key,
+    href: "/key-gen",
+    category: "Security",
+    status: "Available",
+  },
+  {
+    id: "password-gen",
+    title: "Password Generator",
+    description: "Create strong, secure passwords with custom options",
+    icon: Shield,
+    href: "/password-gen",
+    category: "Security",
+    status: "Coming Soon",
+  },
+  {
+    id: "hash-gen",
+    title: "Hash Generator",
+    description: "Generate MD5, SHA-1, SHA-256 hashes for text and files",
+    icon: Hash,
+    href: "/hash-gen",
+    category: "Crypto",
+    status: "Coming Soon",
+  },
+  {
+    id: "jwt-decode",
+    title: "JWT Decoder",
+    description: "Decode and verify JSON Web Tokens",
+    icon: Code,
+    href: "/jwt-decode",
+    category: "Development",
+    status: "Coming Soon",
+  },
+  {
+    id: "base64-encode",
+    title: "Base64 Encoder/Decoder",
+    description: "Encode and decode Base64 strings",
+    icon: Database,
+    href: "/base64",
+    category: "Encoding",
+    status: "Coming Soon",
+  },
+  {
+    id: "config-gen",
+    title: "Config Generator",
+    description: "Generate configuration files for various frameworks",
+    icon: Settings,
+    href: "/config-gen",
+    category: "Development",
+    status: "Coming Soon",
+  },
+];

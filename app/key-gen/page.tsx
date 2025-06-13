@@ -18,6 +18,7 @@ import {
   Eye,
   EyeOff,
   Download,
+  HelpCircle,
 } from "lucide-react";
 import { HeaderCard } from "@/components/HeaderCard";
 import { InfoCard } from "@/components/InfoCard";
@@ -26,8 +27,10 @@ import { CodeGuideCard } from "@/components/CodeGuideCard";
 import { HistoryCard } from "@/components/HistoryCard";
 import { StrengthIndicator } from "@/components/StrengthIndicator";
 import { DisplayField } from "@/components/DisplayField";
+import { FAQCard } from "@/components/FAQCard";
 import { generateKey, calculateStrength } from "@/utils/keyUtils";
 import { HistoryItem } from "@/types/django_key_gen";
+import { djangoFAQs } from "@/data/djangoFAQ";
 
 interface DjangoHistoryItem extends HistoryItem {
   key: string;
@@ -149,11 +152,10 @@ SECRET_KEY='${key}'
           title="Django Secret Key Generator"
           description="Generate cryptographically secure secret keys for your Django applications"
           icon={Key}
-          navButton={{
-            label: "Home",
-            icon: ArrowLeft,
-            href: "/",
-          }}
+          breadcrumbs={[
+            { label: "Home", href: "/", icon: ArrowLeft },
+            { label: "Django Secret Key Generator", href: "/key-gen" },
+          ]}
         />
 
         <div className="grid gap-6 lg:grid-cols-4">
@@ -325,6 +327,9 @@ SECRET_KEY='${key}'
                 },
               ]}
             />
+
+            {/* FAQ Card */}
+            <FAQCard title="Django Key FAQs" icon={HelpCircle} faqs={djangoFAQs} defaultOpenIndex={0} />
           </div>
 
           {/* Sidebar */}
