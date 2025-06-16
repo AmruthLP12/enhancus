@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://enhancus.vercel.app//sitemap.xml

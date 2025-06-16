@@ -14,6 +14,16 @@ import { Home, FileText, Download, Shield, Copy, Check, RotateCcw } from "lucide
 import { EnvVariable } from "@/types/envbuddy";
 import { exportEnv, exportEnvExample, exportJson, validateVariables, downloadFile } from "@/utils/envUtils";
 import { v4 as uuidv4 } from "uuid";
+import type { Metadata } from "next";
+
+
+
+export const metadata: Metadata = {
+  title: "EnvBuddy – .env Manager & Exporter",
+  description: "Easily manage and export environment variables as .env, .env.example, or JSON.",
+  keywords: [".env manager", "envbuddy", "export .env", ".env.example", "JSON environment variables"],
+};
+
 
 export default function EnvBuddyPage() {
   const [variables, setVariables] = useState<EnvVariable[]>([]);

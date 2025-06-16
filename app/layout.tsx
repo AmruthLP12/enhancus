@@ -15,9 +15,51 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Enhancus",
-  description: "Utility suite — starting with key generation",
+  title: "Enhancus – Developer Tools Suite (EnvBuddy, QR Generator, JSON Formatter)",
+  description:
+    "Enhancus is a powerful collection of online tools for developers. Use EnvBuddy to manage .env files, generate .env.example, or export JSON. More utilities coming soon!",
+  keywords: [
+    "EnvBuddy",
+    ".env editor",
+    "environment variables",
+    ".env to JSON",
+    "export env file",
+    "developer tools online",
+    "Enhancus",
+    "QR code generator",
+    "JSON formatter",
+    "regex tester",
+    "open source tools",
+  ],
+  openGraph: {
+    title: "Enhancus – Dev Tools Suite (EnvBuddy, QR, JSON)",
+    description:
+      "Enhancus helps developers manage .env files, format JSON, generate QR codes, and more. Try EnvBuddy now!",
+    url: "https://your-vercel-domain.vercel.app",
+    siteName: "Enhancus",
+    images: [
+      {
+        url: "https://your-vercel-domain.vercel.app/og-image.png", // recommended: 1200x630
+        width: 1200,
+        height: 630,
+        alt: "Enhancus – Developer Tools",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Enhancus – Online Dev Tools Suite",
+    description:
+      "Use EnvBuddy to manage .env files and other developer utilities like JSON formatter, QR generator, and more.",
+    images: ["https://your-vercel-domain.vercel.app/og-image.png"],
+  },
+   other: {
+    "google-site-verification": "m3gcO3z77CpmDFtlEBa5Qk-g2yMOUvIFj34TKqbJMoU",
+  },
 };
+
 
 export default function RootLayout({
   children,
