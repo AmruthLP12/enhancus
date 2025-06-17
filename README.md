@@ -65,7 +65,7 @@ Enhancus is a web-based collection of developer tools designed to simplify commo
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-username/enhancus.git
+   git clone https://github.com/amruthlp12/enhancus.git
    cd enhancus
    ```
 
