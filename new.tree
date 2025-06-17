@@ -1,0 +1,69 @@
+
+├── app
+│  ├── env-buddy
+│  │  ├── EnvBuddyPage.tsx
+│  │  └── page.tsx
+│  ├── favicon.ico
+│  ├── globals.css
+│  ├── key-gen
+│  │  └── page.tsx
+│  ├── layout.tsx
+│  └── page.tsx
+├── components
+│  ├── AlertCard.tsx
+│  ├── CodeGuideCard.tsx
+│  ├── DisplayField.tsx
+│  ├── django_key_gen
+│  │  ├── HistoryCard.tsx
+│  │  └── StrengthIndicator.tsx
+│  ├── envbuddy
+│  │  ├── EnvImportCard.tsx
+│  │  └── EnvVariableTable.tsx
+│  ├── FAQCard.tsx
+│  ├── HeaderCard.tsx
+│  ├── InfoCard.tsx
+│  ├── navbar.tsx
+│  ├── theme-provider.tsx
+│  └── ui
+│    ├── alert.tsx
+│    ├── badge.tsx
+│    ├── button.tsx
+│    ├── card.tsx
+│    ├── dropdown-menu.tsx
+│    ├── input.tsx
+│    ├── label.tsx
+│    ├── mode-toggle.tsx
+│    ├── separator.tsx
+│    ├── slider.tsx
+│    ├── switch.tsx
+│    ├── table.tsx
+│    └── textarea.tsx
+├── components.json
+├── data
+│  ├── djangoFAQ.ts
+│  ├── envBuddyFAQ.ts
+│  └── tools.ts
+├── eslint.config.mjs
+├── lib
+│  └── utils.ts
+├── next-env.d.ts
+├── next-sitemap.config.js
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│  ├── file.svg
+│  ├── globe.svg
+│  ├── next.svg
+│  ├── robots.txt
+│  ├── vercel.svg
+│  └── window.svg
+├── README.md
+├── tsconfig.json
+├── types
+│  ├── django_key_gen.ts
+│  └── envbuddy.ts
+└── utils
+  ├── envUtils.ts
+  └── keyUtils.ts
