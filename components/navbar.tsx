@@ -1,12 +1,13 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
-import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
+import { SearchCommand } from "@/components/search-command";
 
 export function Navbar() {
   const [mounted, setMounted] = useState(false);
@@ -27,7 +28,7 @@ export function Navbar() {
                 <span className="text-primary-foreground font-bold text-sm">E</span>
               </div>
               <span className="font-bold text-xl bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                Enhancus
+                EnhancUS
               </span>
             </Link>
           </div>
@@ -42,12 +43,15 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo and Title */}
         <div className="flex items-center space-x-4">
-          <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
+          <Link
+            href="/"
+            className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+          >
             <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-sm">
               <span className="text-primary-foreground font-bold text-sm">E</span>
             </div>
             <span className="font-bold text-xl bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              Enhancus
+              EnhancUS
             </span>
           </Link>
           {/* Desktop Navigation */}
@@ -70,6 +74,7 @@ export function Navbar() {
               Tools
             </Button>
           </Link>
+          <SearchCommand />
           <ModeToggle />
         </div>
 
