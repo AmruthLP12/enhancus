@@ -6,6 +6,7 @@ import {
   Key,
   Settings,
   Shield,
+  PaintBucket,
 } from "lucide-react";
 
 export const tools = [
@@ -26,6 +27,24 @@ export const tools = [
     category: "Configuration",
     icon: FileText,
     href: "/env-buddy",
+    status: "Available",
+  },
+  {
+    id: "Unfold Colors",
+    title: "Unfold Colors",
+    description: "Generate and manage colors for Django Unfold projects",
+    icon: PaintBucket,
+    href: "/unfold-colors",
+    category: "Design",
+    status: "Available",
+  },
+  {
+    id: "unfold-colors-advanced",
+    name: "Unfold Colors Advanced",
+    description: "Customize individual shades for Django Unfold color schemes.",
+    href: "/unfold-colors/advanced",
+    icon: PaintBucket,
+    category: "Design",
     status: "Available",
   },
   {

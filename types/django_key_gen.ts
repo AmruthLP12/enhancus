@@ -52,19 +52,7 @@ export interface DisplayFieldProps {
   toggleIcons?: [LucideIcon, LucideIcon]; // [visible, hidden]
 }
 
-export interface FAQItem {
-  question: string;
-  answer: string;
-  icon?: LucideIcon;
-}
 
-export interface FAQCardProps {
-  title?: string;
-  faqs: FAQItem[];
-  icon?: LucideIcon;
-  defaultOpenIndex?: number; // Index of FAQ to be open by default
-  className?: string;
-}
 
 export interface BreadcrumbItem {
   label: string;
