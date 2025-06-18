@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { FAQCardProps } from "@/types/django_key_gen";
+import { FAQCardProps } from "@/types/types";
 
 export const FAQCard = ({
   title = "Frequently Asked Questions",
