@@ -1,4 +1,4 @@
-import { FAQItem } from "@/types/django_key_gen";
+import { FAQItem } from "@/types/types";
 import { HelpCircle } from "lucide-react";
 
 export const envBuddyFAQs: FAQItem[] = [
