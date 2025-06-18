@@ -40,7 +40,7 @@ export const tools = [
   },
   {
     id: "unfold-colors-advanced",
-    name: "Unfold Colors Advanced",
+    title: "Unfold Colors Advanced",
     description: "Customize individual shades for Django Unfold color schemes.",
     href: "/unfold-colors/advanced",
     icon: PaintBucket,

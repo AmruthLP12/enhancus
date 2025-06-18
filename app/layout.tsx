@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
+import { Support } from "@/components/Support";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Enhancus – Developer Tools Suite (EnvBuddy, QR Generator, JSON Formatter)",
+  title:
+    "Enhancus – Developer Tools Suite (EnvBuddy, QR Generator, JSON Formatter)",
   description:
     "Enhancus is a powerful collection of online tools for developers. Use EnvBuddy to manage .env files, generate .env.example, or export JSON. More utilities coming soon!",
   keywords: [
@@ -55,11 +57,10 @@ export const metadata: Metadata = {
       "Use EnvBuddy to manage .env files and other developer utilities like JSON formatter, QR generator, and more.",
     images: ["https://your-vercel-domain.vercel.app/og-image.png"],
   },
-   other: {
+  other: {
     "google-site-verification": "m3gcO3z77CpmDFtlEBa5Qk-g2yMOUvIFj34TKqbJMoU",
   },
 };
-
 
 export default function RootLayout({
   children,
@@ -80,6 +81,7 @@ export default function RootLayout({
           <div className="relative min-h-screen">
             <Navbar />
             <main className="relative">{children}</main>
+            <Support />
           </div>
         </ThemeProvider>
       </body>
