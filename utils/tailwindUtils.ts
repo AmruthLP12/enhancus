@@ -6,7 +6,35 @@ export const convertToOKLCH = (color: string): string => {
   return parsed ? formatCss(parsed) : color;
 };
 
+export function generateTailwindConfig(colors: ThemeConfig): string {
+  const formatColorValue = (v: string) => `"${v}"`;
 
+  const lightColors = Object.entries(colors.light)
+    .map(([key, val]) => `      "${key}": ${formatColorValue(val.value)}`)
+    .join(",\n");
+
+  const darkColors = Object.entries(colors.dark)
+    .map(([key, val]) => `      "${key}": ${formatColorValue(val.value)}`)
+    .join(",\n");
+
+  return `/** @type {import('tailwindcss').Config} */
+const config = {
+  darkMode: "class",
+  theme: {
+    colors: {
+${lightColors}
+    },
+    extend: {
+      colors: {
+${darkColors}
+      }
+    }
+  }
+};
+
+export default config;
+`;
+}
 
 export const generateThemeCSS = (config: ThemeConfig): string => {
   const lightVars = Object.entries(config.light)
@@ -24,7 +52,9 @@ export const generateThemeCSS = (config: ThemeConfig): string => {
 @custom-variant dark-states (&:is(.dark *));
 
 @theme inline {
-${Object.keys(config.light).map((key) => `  --color-${key}: var(--${key});`).join("\n")}
+${Object.keys(config.light)
+  .map((key) => `  --color-${key}: var(--${key});`)
+  .join("\n")}
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --radius-sm: calc(var(--radius) - 4px);

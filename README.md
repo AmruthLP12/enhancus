@@ -37,7 +37,7 @@ Enhancus is a web-based collection of developer tools designed to simplify commo
 - Visual color pickers in a grid (`components/tailwindforge/ColorPickerCard.tsx`).
 - Preview light/dark modes with UI elements (`components/tailwindforge/PreviewCard.tsx`).
 - Live OKLCH, HEX, HSB conversion.
-- Export as `@theme inline` CSS or JSON with "Copied" confirmation (`components/tailwindforge/ExportCard.tsx`).
+- Export as `@theme inline` CSS, JSON, or `tailwind.config.ts` with "Copied" confirmation (`components/tailwindforge/ExportCard.tsx`).
 - Save/load via LocalStorage.
 - Navigation to Advanced mode via "Go to Advanced Mode" button in Theme Settings.
 - Reset to default colors or randomize colors via buttons in Theme Settings.
@@ -48,7 +48,7 @@ Enhancus is a web-based collection of developer tools designed to simplify commo
 - Visual color pickers in a grid (`components/tailwindforge/ColorPickerCard.tsx`).
 - Preview light/dark modes with UI elements (`components/tailwindforge/PreviewCard.tsx`).
 - Live OKLCH, HEX, HSB conversion.
-- Export as `@theme inline` CSS or JSON with "Copied" confirmation (`components/tailwindforge/ExportCard.tsx`).
+- Export as `@theme inline` CSS, JSON, or `tailwind.config.ts` with "Copied" confirmation (`components/tailwindforge/ExportCard.tsx`).
 - Save/load via LocalStorage.
 - Navigation to Basic mode via "Go to Basic Mode" button in Theme Settings.
 - Reset to default colors or randomize colors via buttons in Theme Settings.
@@ -102,7 +102,7 @@ Enhancus is a web-based collection of developer tools designed to simplify commo
    ```
 3. Install Shadcn/UI components:
    ```bash
-   npx shadcn-ui@latest add accordion alert badge button card command dialog dropdown-menu input label popover separator slider switch table textarea
+   npx shadcn-ui@latest add accordion alert badge button card command dialog dropdown-menu input label popover separator slider switch table textarea tabs
    ```
 
 ### Running the Application
@@ -128,32 +128,42 @@ Enhancus is a web-based collection of developer tools designed to simplify commo
 1. Navigate to `/tailwind-forge/basic`.
 2. Customize core colors via `ColorPickerCard.tsx` (grid layout).
 3. Preview light/dark modes in `PreviewCard.tsx`.
-4. Export CSS/JSON with “Copied” confirmation (`ExportCard.tsx`).
+4. Export as CSS, JSON, or `tailwind.config.ts` with “Copied” confirmation (`ExportCard.tsx`).
 5. Save/load via LocalStorage.
 6. Switch to Advanced mode via "Go to Advanced Mode" button.
 7. Reset to default colors or generate random colors via Theme Settings buttons.
 8. Refer to `FAQCard.tsx` (`data/tailwindForgeFAQ.ts`).
 
-**Example CSS Output**:
-```css
-@theme inline {
-  --color-background: var(--background);
-  --color-primary: var(--primary);
-}
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-}
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-}
+**Example `tailwind.config.ts` Output**:
+```typescript
+/** @type {import('tailwindcss').Config} */
+const config = {
+  darkMode: "class",
+  theme: {
+    colors: {
+      "background": "oklch(1 0 0)",
+      "foreground": "oklch(0.145 0 0)",
+      "primary": "oklch(0.205 0 0)",
+      // ...
+    },
+    extend: {
+      colors: {
+        "background": "oklch(0.145 0 0)",
+        "foreground": "oklch(0.985 0 0)",
+        "primary": "oklch(0.922 0 0)",
+        // ...
+      }
+    }
+  }
+};
+
+export default config;
 ```
 
 ### TailwindForge Advanced
 1. Navigate to `/tailwind-forge/advanced`.
 2. Customize all colors, including chart/sidebar.
-3. Preview, export with “Copied” confirmation, save/load.
+3. Preview, export as CSS, JSON, or `tailwind.config.ts` with “Copied” confirmation, save/load.
 4. Switch to Basic mode via "Go to Basic Mode" button.
 5. Reset to default colors or generate random colors via Theme Settings buttons.
 6. Refer to `FAQCard.tsx`.
@@ -265,6 +275,7 @@ DEBUG_MODE=true
 │   │   ├── switch.tsx
 │   │   ├── table.tsx
 │   │   ├── textarea.tsx
+│   │   ├── tabs.tsx
 │   ├── AlertCard.tsx
 │   ├── CodeGuideCard.tsx
 │   ├── DisplayField.tsx
@@ -331,8 +342,7 @@ npm install -D @types/react @types/node @types/uuid @types/culori
 
 ## Support the Project
 Support via [Ko-Fi](https://ko-fi.com/codewithamruth) or [PayPal](https://paypal.me/amruthlp12).
-
-Star the repo: [GitHub](https://github.com/amruthlp12/enhancus).
+ Star the repo: [GitHub](https://github.com/amruthlp12/enhancus).
 
 ## Contributing
 1. Fork the repository.
