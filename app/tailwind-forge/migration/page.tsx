@@ -10,6 +10,7 @@ import { FAQCard } from "@/components/FAQCard";
 import { tailwindForgeFAQs } from "@/data/tailwindForgeFAQ";
 import { generateFromNestedColors } from "@/utils/tailwindUtils";
 import Link from "next/link";
+import Counter from "@/components/analytics/Counter";
 
 export default function TailwindMigrationPage() {
   const [inputConfig, setInputConfig] = useState("");
@@ -67,6 +68,7 @@ export default function TailwindMigrationPage() {
 
   return (
     <div className="container mx-auto px-4 py-16">
+      <Counter page="tailwindforge-migration" className="text-right px-10 py-2" />
       <HeaderCard
         title="TailwindForge Migration"
         icon={PaintBucket}

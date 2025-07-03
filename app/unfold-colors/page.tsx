@@ -12,6 +12,7 @@ import { unfoldColorsFAQs } from "@/data/unfoldColorsFAQ";
 import { Colors, BaseColors, FontColors } from "@/types/unfoldColors";
 import { generateShades, generateRandomRGB } from "@/utils/colorUtils";
 import Link from "next/link";
+import Counter from "@/components/analytics/Counter";
 
 const defaultBaseColors: BaseColors = {
   primary: "40 110 180", // primary.500
@@ -128,6 +129,7 @@ export default function UnfoldColorsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 py-8">
+      <Counter page="unfold-colors" className="text-right px-10 py-2" />
       <div className="container mx-auto px-4 max-w-6xl">
         <HeaderCard
           title="Unfold Colors"
@@ -145,7 +147,7 @@ export default function UnfoldColorsPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-yellow-500" />
-                  I'm Feeling Lucky
+                  I&apos;m Feeling Lucky
                 </CardTitle>
               </CardHeader>
               <CardContent>

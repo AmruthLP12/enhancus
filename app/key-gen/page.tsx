@@ -31,6 +31,7 @@ import { FAQCard } from "@/components/FAQCard";
 import { generateKey, calculateStrength } from "@/utils/keyUtils";
 import { HistoryItem } from "@/types/django_key_gen";
 import { djangoFAQs } from "@/data/djangoFAQ";
+import Counter from "@/components/analytics/Counter";
 
 interface DjangoHistoryItem extends HistoryItem {
   key: string;
@@ -146,6 +147,7 @@ SECRET_KEY='${key}'
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 py-8">
+      <Counter page="key-gen" className="text-right px-10 py-2" />
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <HeaderCard

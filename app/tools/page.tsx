@@ -23,6 +23,7 @@ import { useState } from "react";
 
 // Mock tools data - replace with actual import
 import { tools } from "@/data/tools";
+import Counter from "@/components/analytics/Counter";
 
 const categories = [...new Set(tools.map((tool) => tool.category))];
 
@@ -52,6 +53,7 @@ export default function ToolsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20">
+      <Counter page="tools" className="text-right px-10 py-2" />
       {/* Header */}
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">

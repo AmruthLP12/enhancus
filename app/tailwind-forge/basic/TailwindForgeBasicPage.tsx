@@ -13,6 +13,7 @@ import { HeaderCard } from "@/components/HeaderCard";
 import Link from "next/link";
 import { tailwindForgeFAQs } from "@/data/tailwindForgeFAQ";
 import { useColorStore } from "@/components/tailwindforge/store";
+import Counter from "@/components/analytics/Counter";
 
 export default function TailwindForgeBasicPage() {
   const { loadConfig, resetColors, randomizeColors } = useColorStore();
@@ -23,6 +24,7 @@ export default function TailwindForgeBasicPage() {
 
   return (
     <div className="container mx-auto px-4 py-16">
+      <Counter page="tailwindforge-basic" className="text-right px-10 py-2" />
       <HeaderCard
         title="TailwindForge Basic"
         icon={PaintBucket}

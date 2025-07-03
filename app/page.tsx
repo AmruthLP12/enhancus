@@ -8,11 +8,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Zap, Shield, Settings, Code, Sparkles, Users, Star } from "lucide-react";
+import { ArrowRight, Zap, Code, Sparkles, Users, Star } from "lucide-react";
 import { tools } from "@/data/tools";
+import Counter from "@/components/analytics/Counter";
+
+interface Tool {
+  id: string | number;
+  title: string;
+  description: string;
+  category: string;
+  status: string;
+  icon: React.ElementType;
+  href: string;
+  isPopular?: boolean;
+}
 
 // Randomly select 3 available tools
-const getRandomTools = (tools: any[], count: number) => {
+const getRandomTools = (tools: Tool[], count: number) => {
   const availableTools = tools.filter((tool) => tool.status === "Available");
   const shuffled = [...availableTools].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, Math.min(count, availableTools.length));
@@ -29,6 +41,7 @@ const stats = [
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <Counter page="home" className="text-right px-10 py-2" />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-muted/30">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -42,8 +55,13 @@ export default function Home() {
               EnhancUS
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed">
-              Supercharge your development workflow with our comprehensive suite of 
-              <span className="text-foreground font-medium"> essential tools</span> and utilities.
+              Supercharge your development workflow with our comprehensive suite
+              of
+              <span className="text-foreground font-medium">
+                {" "}
+                essential tools
+              </span>{" "}
+              and utilities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/tools">
@@ -67,8 +85,12 @@ export default function Home() {
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mb-3">
                   <stat.icon className="h-6 w-6" />
                 </div>
-                <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-3xl font-bold text-foreground mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -79,7 +101,9 @@ export default function Home() {
       <section id="featured" className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Tools</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Featured Tools
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Discover our most popular and essential development utilities
             </p>
@@ -105,7 +129,7 @@ export default function Home() {
                       </div>
                     </div>
                   )}
-                  
+
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
@@ -170,9 +194,12 @@ export default function Home() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What's Coming Next</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              What&apos;s Coming Next
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We're constantly expanding our toolkit with new utilities to boost your productivity
+              We&apos;re constantly expanding our toolkit with new utilities to boost
+              your productivity
             </p>
           </div>
 
@@ -182,16 +209,19 @@ export default function Home() {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
                   <Zap className="h-8 w-8" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-4">More Powerful Tools</h3>
+                <h3 className="text-2xl font-semibold mb-4">
+                  More Powerful Tools
+                </h3>
                 <p className="text-muted-foreground mb-6">
-                  Our roadmap includes exciting new utilities to streamline your development process
+                  Our roadmap includes exciting new utilities to streamline your
+                  development process
                 </p>
               </div>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
                 {[
                   "URL Shortener",
-                  "Color Palette Generator", 
+                  "Color Palette Generator",
                   "QR Code Generator",
                   "JSON Formatter",
                   "Regex Tester",
@@ -199,9 +229,13 @@ export default function Home() {
                   "Hash Generator",
                   "Password Generator",
                   "Image Optimizer",
-                  "API Tester"
+                  "API Tester",
                 ].map((tool, index) => (
-                  <Badge key={index} variant="outline" className="justify-center py-2">
+                  <Badge
+                    key={index}
+                    variant="outline"
+                    className="justify-center py-2"
+                  >
                     {tool}
                   </Badge>
                 ))}
@@ -211,7 +245,11 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground mb-4">
                   Want to suggest a new tool or feature?
                 </p>
-                <Link href="https://github.com/amruthlp12" target="_blank" rel="noopener noreferrer">
+                <Link
+                  href="https://github.com/amruthlp12"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button variant="outline">
                     Share Your Ideas
                     <ArrowRight className="ml-2 h-4 w-4" />

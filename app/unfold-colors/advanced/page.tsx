@@ -30,6 +30,7 @@ import {
 } from "@/types/unfoldColors";
 import { generateRandomRGB } from "@/utils/colorUtils";
 import Link from "next/link";
+import Counter from "@/components/analytics/Counter";
 
 const generateRandomShades = (): { [K in ShadeKeys]: string } => {
   const shades: ShadeKeys[] = [
@@ -200,6 +201,7 @@ export default function UnfoldColorsAdvancedPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/20 py-8">
+      <Counter page="unfold-colors-advanced" className="text-right px-10 py-2" />
       <div className="container mx-auto px-4 max-w-6xl">
         <HeaderCard
           title="Unfold Colors Advanced"
@@ -217,7 +219,7 @@ export default function UnfoldColorsAdvancedPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-yellow-500" />
-                  I'm Feeling Lucky
+                  I&apos;m Feeling Lucky
                 </CardTitle>
               </CardHeader>
               <CardContent>
