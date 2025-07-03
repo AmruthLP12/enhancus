@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title:
-    "Enhancus – Developer Tools Suite (EnvBuddy, QR Generator, JSON Formatter)",
+    "Enhancus – Developer Tools Suite",
   description:
     "Enhancus is a powerful collection of online tools for developers. Use EnvBuddy to manage .env files, generate .env.example, or export JSON. More utilities coming soon!",
   keywords: [
@@ -70,6 +70,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head >
+        <meta name="apple-mobile-web-app-title" content="EnhancUS" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
