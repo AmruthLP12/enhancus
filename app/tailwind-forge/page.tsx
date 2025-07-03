@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PaintBucket } from "lucide-react";
@@ -23,9 +25,9 @@ export default function TailwindForgeLanding() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-4">
-              TailwindForge helps you create custom Tailwind CSS v4 color palettes with OKLCH support. Choose between Basic mode for core colors or Advanced mode for full customization, including chart and sidebar colors.
+              TailwindForge helps you create and migrate Tailwind CSS v4 color palettes with OKLCH support. Choose Basic mode for core colors, Advanced mode for full customization, or Migration mode to convert Tailwind v3 configs to v4.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Basic Mode</CardTitle>
@@ -49,6 +51,19 @@ export default function TailwindForgeLanding() {
                   </p>
                   <Link href="/tailwind-forge/advanced">
                     <Button>Go to Advanced Mode</Button>
+                  </Link>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Migration Mode</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Convert Tailwind v3 color configurations to Tailwind v4 @theme inline CSS with OKLCH support.
+                  </p>
+                  <Link href="/tailwind-forge/migration">
+                    <Button>Go to Migration Mode</Button>
                   </Link>
                 </CardContent>
               </Card>

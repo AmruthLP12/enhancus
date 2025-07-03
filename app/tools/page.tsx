@@ -211,8 +211,8 @@ export default function ToolsPage() {
                           </Badge>
                         ))}
                       </div>
-                      <Link href={tool.href}>
-                        <Button className="w-full group-hover:bg-primary/90 transition-all duration-200">
+                      <Link href={tool.href} >
+                        <Button className="w-full group-hover:bg-primary/90 transition-all duration-200 cursor-pointer">
                           Launch Tool
                           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                         </Button>

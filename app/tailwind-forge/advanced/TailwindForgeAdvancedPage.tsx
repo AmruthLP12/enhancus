@@ -29,7 +29,8 @@ export default function TailwindForgeAdvancedPage() {
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Tools", href: "/tools" },
-          { label: "TailwindForge Advanced", href: "/tailwind-forge/advanced" },
+          {label: "TailwindForge", href: "/tailwind-forge"},
+          { label: "Advanced", href: "/tailwind-forge/advanced" },
         ]}
       />
       <div className="mt-6 space-y-6">
@@ -78,6 +79,13 @@ export default function TailwindForgeAdvancedPage() {
                     </Button>
                   </Link>
                 </div>
+                <div>
+                  <Link href="/tailwind-forge/migration">
+                    <Button variant="default" className="w-full cursor-pointer">
+                      <span className="mr-2">🛠</span> Go to Migration Mode
+                    </Button>
+                  </Link>                  
+                </div>
 
                 {/* Actions */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -102,7 +110,7 @@ export default function TailwindForgeAdvancedPage() {
             </Card>
 
             <ExportCard />
-            <FAQCard faqs={tailwindForgeFAQs} />
+            <FAQCard faqs={tailwindForgeFAQs.filter(faq => faq.id.startsWith("advanced"))} />
           </div>
         </div>
       </div>

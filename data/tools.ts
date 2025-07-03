@@ -130,6 +130,26 @@ export const tools = [
     ],
   },
   {
+    id: "tailwind-forge-migration-v3",
+    title: "TailwindForge Migration (v3)",
+    description:
+      "Convert Tailwind v3 color configurations to Tailwind v4 @theme inline CSS with OKLCH support",
+    icon: PaintBucket,
+    href: "/tailwind-forge/migration",
+    category: "Design",
+    status: "Available",
+    isPopular: false,
+    keywords: ["tailwind", "migration", "v3", "v4", "colors", "oklch"],
+    features: [
+      "Convert Tailwind v3 colors to v4 OKLCH",
+      "Input tailwind.config.js content",
+      "Load sample v3 config",
+      "Generate @theme inline CSS",
+      "Responsive UI",
+    ],
+    tags: ["tailwind", "migration", "v3", "v4", "colors", "oklch"],
+  },
+  {
     id: "password-gen",
     title: "Password Generator",
     description: "Create strong, secure passwords with custom options",

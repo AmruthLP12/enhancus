@@ -1,0 +1,171 @@
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PaintBucket, Copy, Download } from "lucide-react";
+import { HeaderCard } from "@/components/HeaderCard";
+import { FAQCard } from "@/components/FAQCard";
+import { tailwindForgeFAQs } from "@/data/tailwindForgeFAQ";
+import { generateFromNestedColors } from "@/utils/tailwindUtils";
+import Link from "next/link";
+
+export default function TailwindMigrationPage() {
+  const [inputConfig, setInputConfig] = useState("");
+  const [output, setOutput] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  const handleConvert = () => {
+    const converted = generateFromNestedColors(inputConfig);
+    setOutput(converted);
+    setCopied(false);
+  };
+
+  const loadSampleConfig = () => {
+    setInputConfig(`theme: {
+  colors: {
+    background: "#ffffff",
+    foreground: "#111827",
+    primary: {
+      DEFAULT: "#3b82f6",
+      foreground: "#ffffff",
+      50: "#eff6ff",
+      100: "#dbeafe",
+      200: "#bfdbfe"
+    },
+    secondary: {
+      DEFAULT: "#6b7280",
+      foreground: "#ffffff",
+      50: "#f9fafb",
+      100: "#f3f4f6"
+    }
+  }
+}`);
+    setCopied(false);
+  };
+
+  const handleCopy = async () => {
+    if (output) {
+      await navigator.clipboard.writeText(output);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleDownload = () => {
+    if (output) {
+      const blob = new Blob([output], { type: "text/css" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "tailwind-v4-theme.css";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  return (
+    <div className="container mx-auto px-4 py-16">
+      <HeaderCard
+        title="TailwindForge Migration"
+        icon={PaintBucket}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Tools", href: "/tools" },
+          { label: "TailwindForge", href: "/tailwind-forge" },
+          { label: "Migration", href: "/tailwind-forge/migration" },
+        ]}
+      />
+      <div className="mt-6 space-y-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Mode Selection</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Link href="/tailwind-forge/basic">
+                <Button variant="default" className="w-full cursor-pointer">
+                  <span className="mr-2">🛠</span> Go to Basic Mode
+                </Button>
+              </Link>
+              <Link href="/tailwind-forge/advanced">
+                <Button variant="default" className="w-full cursor-pointer">
+                  <span className="mr-2">🛠</span> Go to Advanced Mode
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Tailwind v3 ➝ v4 Migration Tool</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-muted-foreground">
+              Paste your Tailwind v3 config and convert colors to Tailwind v4
+              @theme inline CSS.
+            </p>
+            <div className="flex gap-2">
+              <Button onClick={handleConvert}>Convert</Button>
+              <Button variant="ghost" onClick={loadSampleConfig}>
+                Load Sample
+              </Button>
+              <Button
+                variant={copied ? "default" : "outline"}
+                onClick={handleCopy}
+                disabled={!output}
+              >
+                <Copy className="mr-2 h-4 w-4" />
+                {copied ? "Copied!" : "Copy CSS"}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleDownload}
+                disabled={!output}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download CSS
+              </Button>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div>
+                <h3 className="text-md font-semibold mb-2">Input Config</h3>
+                <Textarea
+                  spellCheck={false}
+                  className="min-h-[400px] font-mono text-sm"
+                  placeholder="Paste tailwind.config.js content here..."
+                  value={inputConfig}
+                  onChange={(e) => setInputConfig(e.target.value)}
+                />
+              </div>
+              <div>
+                <h3 className="text-md font-semibold mb-2">
+                  Tailwind v4 Theme Output
+                </h3>
+                <Textarea
+                  className="min-h-[400px] font-mono text-sm"
+                  value={output}
+                  readOnly
+                  placeholder="Converted CSS will appear here..."
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Frequently Asked Questions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <FAQCard
+              faqs={tailwindForgeFAQs.filter((faq) =>
+                faq.id.startsWith("migration")
+              )}
+            />
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}

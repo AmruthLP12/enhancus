@@ -13,6 +13,7 @@ Enhancus is a web-based collection of developer tools designed to simplify commo
   - [TailwindForge](#tailwindforge)
   - [TailwindForge Basic](#tailwindforge-basic)
   - [TailwindForge Advanced](#tailwindforge-advanced)
+  - [TailwindForge Migration](#tailwindforge-migration)
   - [EnvBuddy](#envbuddy)
   - [Django Secret Key Generator](#django-secret-key-generator)
   - [Unfold Colors](#unfold-colors)
@@ -54,6 +55,16 @@ Enhancus is a web-based collection of developer tools designed to simplify commo
 - Reset to default colors or randomize colors via buttons in Theme Settings.
 - Responsive UI with `HeaderCard`, `FAQCard` (`data/tailwindForgeFAQ.ts`).
 
+### TailwindForge Migration
+- Convert Tailwind v3 color configurations to Tailwind v4 `@theme inline` CSS with OKLCH support at `/tailwind-forge/migration`.
+- Supports nested color objects (e.g., `primary.DEFAULT`, `primary.50`) using `generateFromNestedColors` (`utils/tailwindUtils.ts`).
+- Uses `culori` for HEX-to-OKLCH conversion, preserving non-HEX values (e.g., `hsl(var(--primary))`).
+- Side-by-side input/output textareas for pasting v3 config and viewing v4 CSS.
+- Features "Convert", "Load Sample", "Copy CSS", and "Download CSS" buttons with "Copied" confirmation.
+- Includes migration-specific FAQs (`data/tailwindForgeFAQ.ts`).
+- Navigation to Basic and Advanced modes via buttons in Mode Selection.
+- Responsive UI with `HeaderCard`, `FAQCard` at the bottom.
+
 ### EnvBuddy
 - **Manage Environment Variables**: Add, edit, delete, and reorder variables in a table interface with drag-and-drop (`@dnd-kit`), optional/secret toggles, and descriptions.
 - **Import**: Paste or upload `.env` files.
@@ -78,7 +89,7 @@ Enhancus is a web-based collection of developer tools designed to simplify commo
 - Preview and export advanced configurations.
 - Responsive UI with `HeaderCard`, `FAQCard`.
 
-### Category Page
+### Category(Tools) Page
 - Browse tools by category (Security, Configuration, Design) at `/tools`.
 - Display tools from `data/tools.ts` with cards (`components/ui/card.tsx`).
 - Links to tool pages (e.g., `/env-buddy`, `/tailwind-forge`).
@@ -168,6 +179,65 @@ export default config;
 5. Reset to default colors or generate random colors via Theme Settings buttons.
 6. Refer to `FAQCard.tsx`.
 
+### TailwindForge Migration
+1. Navigate to `/tailwind-forge/migration`.
+2. Paste a Tailwind v3 `tailwind.config.js` (e.g., `theme: { colors: { ... } }`) into the input textarea.
+3. Click “Load Sample” for a sample config with nested colors.
+4. Click “Convert” to generate Tailwind v4 `@theme inline` CSS with OKLCH colors.
+5. Copy the output CSS to the clipboard or download as `tailwind-v4-theme.css`.
+6. Switch to Basic or Advanced modes via "Go to Basic Mode" or "Go to Advanced Mode" buttons.
+7. View migration-specific FAQs at the bottom for help.
+
+**Example Input Config**:
+```javascript
+theme: {
+  colors: {
+    background: "#ffffff",
+    foreground: "#111827",
+    primary: {
+      DEFAULT: "#3b82f6",
+      foreground: "#ffffff",
+      50: "#eff6ff",
+      100: "#dbeafe",
+      200: "#bfdbfe"
+    }
+  }
+}
+```
+
+**Example Output CSS**:
+```css
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-50: var(--primary-50);
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+}
+
+:root {
+  --background: oklch(1.000 0 0);
+  --foreground: oklch(0.145 0 0);
+  --primary: oklch(0.656 0.151 264.71);
+  --primary-foreground: oklch(1.000 0 0);
+  --primary-50: oklch(0.977 0.013 264.71);
+  --primary-100: oklch(0.941 0.027 264.71);
+  --primary-200: oklch(0.887 0.054 264.71);
+}
+
+.dark {
+  --background: oklch(1.000 0 0);
+  --foreground: oklch(0.145 0 0);
+  --primary: oklch(0.656 0.151 264.71);
+  --primary-foreground: oklch(1.000 0 0);
+  --primary-50: oklch(0.977 0.013 264.71);
+  --primary-100: oklch(0.941 0.027 264.71);
+  --primary-200: oklch(0.887 0.054 264.71);
+}
+```
+
 ### EnvBuddy
 1. Navigate to `/env-buddy`.
 2. Add variables in `EnvVariableTable.tsx` (e.g., `API_KEY=abc123xyz789`).
@@ -212,6 +282,7 @@ DEBUG_MODE=true
 - **TailwindForge**: ![TailwindForge](screenshots/tailwindforge.png)
 - **TailwindForge Basic**: ![Placeholder: TailwindForge Basic](screenshots/tailwindforge-basic.png)
 - **TailwindForge Advanced**: ![Placeholder: TailwindForge Advanced](screenshots/tailwindforge-advanced.png)
+- **TailwindForge Migration**: ![TailwindForge Migration](screenshots/tailwindforge-migration.png)
 - **EnvBuddy**: ![EnvBuddy](screenshots/envbuddy.png)
 - **Django Secret Key Generator**: ![Django Secret Key](screenshots/django-key-gen.png)
 - **Unfold Colors**: ![Unfold Colors](screenshots/unfold-colors.png)
@@ -237,6 +308,8 @@ DEBUG_MODE=true
 │   │   │   └── page.tsx
 │   │   ├── advanced/
 │   │   │   ├── TailwindForgeAdvancedPage.tsx
+│   │   │   └── page.tsx
+│   │   ├── migration/
 │   │   │   └── page.tsx
 │   │   └── page.tsx
 │   ├── layout.tsx
@@ -336,7 +409,7 @@ DEBUG_MODE=true
 
 Install:
 ```bash
-npm install next react typescript tailwindcss@4 lucide-react @radix-ui/react-* @dnd-kit/core @dnd-kit/sortable uuid react-colorful culori@4 zustand
+npm install next react typescript tailwindcss@4 lucide-react @radix-ui/react-* @dnd-kit/core @dnd-kit/sortable uuid react-colorful culori@4 json5 zustand
 npm install -D @types/react @types/node @types/uuid @types/culori
 ```
 

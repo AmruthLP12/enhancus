@@ -29,7 +29,8 @@ export default function TailwindForgeBasicPage() {
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Tools", href: "/tools" },
-          { label: "TailwindForge Basic", href: "/tailwind-forge/basic" },
+          {label: "TailwindForge", href: "/tailwind-forge"},
+          { label: "Basic", href: "/tailwind-forge/basic" },
         ]}
       />
       <div className="mt-6 space-y-6">
@@ -80,6 +81,15 @@ export default function TailwindForgeBasicPage() {
                   </Link>
                 </div>
 
+                {/* Go to Migration Mode Button */}
+                <div>
+                  <Link href="/tailwind-forge/migration">
+                    <Button variant="default" className="w-full cursor-pointer">
+                      <span className="mr-2">🛠</span> Go to Migration Mode
+                    </Button>
+                  </Link>
+                </div>
+
                 {/* Action Buttons: Reset + Random */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <Button
@@ -106,7 +116,7 @@ export default function TailwindForgeBasicPage() {
             <ExportCard />
 
             {/* FAQ */}
-            <FAQCard faqs={tailwindForgeFAQs} />
+            <FAQCard faqs={tailwindForgeFAQs.filter(faq => faq.id.startsWith("basic"))} />
           </div>
         </div>
       </div>
