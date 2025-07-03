@@ -38,11 +38,11 @@ export const metadata: Metadata = {
     title: "Enhancus – Dev Tools Suite (EnvBuddy, QR, JSON)",
     description:
       "Enhancus helps developers manage .env files, format JSON, generate QR codes, and more. Try EnvBuddy now!",
-    url: "https://your-vercel-domain.vercel.app",
+    url: "https://enhancus.vercel.app",
     siteName: "Enhancus",
     images: [
       {
-        url: "https://your-vercel-domain.vercel.app/og-image.png", // recommended: 1200x630
+        url: "https://enhancus.vercel.app/og-image.png", // recommended: 1200x630
         width: 1200,
         height: 630,
         alt: "Enhancus – Developer Tools",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     title: "Enhancus – Online Dev Tools Suite",
     description:
       "Use EnvBuddy to manage .env files and other developer utilities like JSON formatter, QR generator, and more.",
-    images: ["https://your-vercel-domain.vercel.app/og-image.png"],
+    images: ["https://enhancus.vercel.app/og-image.png"],
   },
   other: {
     "google-site-verification": "m3gcO3z77CpmDFtlEBa5Qk-g2yMOUvIFj34TKqbJMoU",
