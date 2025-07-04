@@ -66,9 +66,18 @@ export default function TailwindMigrationPage() {
     }
   };
 
+  const handleResetOutput = () => {
+    setOutput("");
+    setInputConfig("");
+    setCopied(false);
+  };
+
   return (
     <div className="container mx-auto px-4 py-16">
-      <Counter page="tailwindforge-migration" className="text-right px-10 py-2" />
+      <Counter
+        page="tailwindforge-migration"
+        className="text-right px-10 py-2"
+      />
       <HeaderCard
         title="TailwindForge Migration"
         icon={PaintBucket}
@@ -128,6 +137,9 @@ export default function TailwindMigrationPage() {
               >
                 <Download className="mr-2 h-4 w-4" />
                 Download CSS
+              </Button>
+              <Button variant="outline" onClick={handleResetOutput}>
+                Reset Output
               </Button>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
