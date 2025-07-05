@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PaintBucket, Copy, Download } from "lucide-react";
+import { PaintBucket, Copy, Download, RefreshCw } from "lucide-react";
 import { HeaderCard } from "@/components/HeaderCard";
 import { FAQCard } from "@/components/FAQCard";
 import { tailwindForgeFAQs } from "@/data/tailwindForgeFAQ";
@@ -66,9 +66,18 @@ export default function TailwindMigrationPage() {
     }
   };
 
+  const handleResetOutput = () => {
+    setOutput("");
+    setInputConfig("");
+    setCopied(false);
+  };
+
   return (
     <div className="container mx-auto px-4 py-16">
-      <Counter page="tailwindforge-migration" className="text-right px-10 py-2" />
+      <Counter
+        page="tailwindforge-migration"
+        className="text-right px-10 py-2"
+      />
       <HeaderCard
         title="TailwindForge Migration"
         icon={PaintBucket}
@@ -109,12 +118,19 @@ export default function TailwindMigrationPage() {
               @theme inline CSS.
             </p>
             <div className="flex gap-2">
-              <Button onClick={handleConvert}>Convert</Button>
-              <Button variant="ghost" onClick={loadSampleConfig}>
+              <Button onClick={handleConvert} className="cursor-pointer">
+                Convert
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={loadSampleConfig}
+                className="cursor-pointer"
+              >
                 Load Sample
               </Button>
               <Button
                 variant={copied ? "default" : "outline"}
+                className="cursor-pointer"
                 onClick={handleCopy}
                 disabled={!output}
               >
@@ -123,11 +139,20 @@ export default function TailwindMigrationPage() {
               </Button>
               <Button
                 variant="outline"
+                className="cursor-pointer"
                 onClick={handleDownload}
                 disabled={!output}
               >
                 <Download className="mr-2 h-4 w-4" />
                 Download CSS
+              </Button>
+              <Button
+                variant="destructive"
+                className="cursor-pointer"
+                onClick={handleResetOutput}
+              >
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Reset
               </Button>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
