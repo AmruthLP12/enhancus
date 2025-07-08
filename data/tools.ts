@@ -7,6 +7,7 @@ import {
   Settings,
   Shield,
   PaintBucket,
+  Palette,
 } from "lucide-react";
 
 export const tools = [
@@ -148,6 +149,24 @@ export const tools = [
       "Responsive UI",
     ],
     tags: ["tailwind", "migration", "v3", "v4", "colors", "oklch"],
+  },
+  {
+    id: "cronmate",
+    title: "CronMate",
+    description: "Convert natural language to cron expressions with validation and preview.",
+    icon: Palette,
+    href: "/cronmate",
+    category: "Development",
+    status: "Available",
+    isPopular: true,
+    tags: ["cron", "expression", "validation", "preview"],
+    features: [
+      "Convert natural language to cron expressions",
+      "Validate cron expressions",
+      "Preview next 5 run times",
+      "Save recent expressions",
+      "Copy with 'Copied' confirmation",
+    ],
   },
   {
     id: "password-gen",
