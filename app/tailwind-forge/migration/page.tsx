@@ -16,11 +16,18 @@ export default function TailwindMigrationPage() {
   const [inputConfig, setInputConfig] = useState("");
   const [output, setOutput] = useState("");
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleConvert = () => {
-    const converted = generateFromNestedColors(inputConfig);
-    setOutput(converted);
-    setCopied(false);
+    if (!inputConfig.trim()) return;
+    setLoading(true);
+    try {
+      const converted = generateFromNestedColors(inputConfig);
+      setOutput(converted);
+      setCopied(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const loadSampleConfig = () => {
@@ -89,6 +96,7 @@ export default function TailwindMigrationPage() {
         ]}
       />
       <div className="mt-6 space-y-6">
+        {/* Mode Selection */}
         <Card>
           <CardHeader>
             <CardTitle>Mode Selection</CardTitle>
@@ -102,24 +110,33 @@ export default function TailwindMigrationPage() {
               </Link>
               <Link href="/tailwind-forge/advanced">
                 <Button variant="default" className="w-full cursor-pointer">
-                  <span className="mr-2">🛠</span> Go to Advanced Mode
+                  <span className="mr-2">⚙️</span> Go to Advanced Mode
                 </Button>
               </Link>
             </div>
           </CardContent>
         </Card>
+
+        {/* Migration Tool */}
         <Card>
           <CardHeader>
             <CardTitle>Tailwind v3 ➝ v4 Migration Tool</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground">
-              Paste your Tailwind v3 config and convert colors to Tailwind v4
-              @theme inline CSS.
+              Paste your Tailwind v3 config and convert colors to Tailwind v4{" "}
+              <code className="bg-muted px-1 rounded">@theme</code> inline CSS.
             </p>
-            <div className="flex gap-2">
-              <Button onClick={handleConvert} className="cursor-pointer">
-                Convert
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-2">
+              <Button
+                onClick={handleConvert}
+                className="cursor-pointer"
+                disabled={!inputConfig.trim() || loading}
+                aria-disabled={!inputConfig.trim() || loading}
+              >
+                {loading ? "Converting..." : "Convert"}
               </Button>
               <Button
                 variant="ghost"
@@ -155,12 +172,14 @@ export default function TailwindMigrationPage() {
                 Reset
               </Button>
             </div>
+
+            {/* Input / Output Editors */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div>
                 <h3 className="text-md font-semibold mb-2">Input Config</h3>
                 <Textarea
                   spellCheck={false}
-                  className="min-h-[400px] font-mono text-sm"
+                  className="min-h-[400px] font-mono text-sm resize-y"
                   placeholder="Paste tailwind.config.js content here..."
                   value={inputConfig}
                   onChange={(e) => setInputConfig(e.target.value)}
@@ -171,7 +190,7 @@ export default function TailwindMigrationPage() {
                   Tailwind v4 Theme Output
                 </h3>
                 <Textarea
-                  className="min-h-[400px] font-mono text-sm"
+                  className="min-h-[400px] font-mono text-sm resize-y"
                   value={output}
                   readOnly
                   placeholder="Converted CSS will appear here..."
@@ -180,6 +199,8 @@ export default function TailwindMigrationPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* FAQ Section */}
         <Card>
           <CardHeader>
             <CardTitle>Frequently Asked Questions</CardTitle>
