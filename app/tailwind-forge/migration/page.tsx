@@ -81,10 +81,10 @@ export default function TailwindMigrationPage() {
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <Counter
-        page="tailwindforge-migration"
-        className="text-right px-10 py-2"
-      />
+      {/* Analytics Counter */}
+      <Counter page="tailwindforge-migration" className="text-right px-10 py-2" />
+
+      {/* Header */}
       <HeaderCard
         title="TailwindForge Migration"
         icon={PaintBucket}
@@ -95,6 +95,7 @@ export default function TailwindMigrationPage() {
           { label: "Migration", href: "/tailwind-forge/migration" },
         ]}
       />
+
       <div className="mt-6 space-y-6">
         {/* Mode Selection */}
         <Card>
@@ -138,11 +139,7 @@ export default function TailwindMigrationPage() {
               >
                 {loading ? "Converting..." : "Convert"}
               </Button>
-              <Button
-                variant="ghost"
-                onClick={loadSampleConfig}
-                className="cursor-pointer"
-              >
+              <Button variant="ghost" onClick={loadSampleConfig} className="cursor-pointer">
                 Load Sample
               </Button>
               <Button
@@ -186,9 +183,7 @@ export default function TailwindMigrationPage() {
                 />
               </div>
               <div>
-                <h3 className="text-md font-semibold mb-2">
-                  Tailwind v4 Theme Output
-                </h3>
+                <h3 className="text-md font-semibold mb-2">Tailwind v4 Theme Output</h3>
                 <Textarea
                   className="min-h-[400px] font-mono text-sm resize-y"
                   value={output}
